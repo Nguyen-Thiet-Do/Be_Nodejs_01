@@ -1,0 +1,32 @@
+{
+  "name": "be_nodejs_01",
+  "version": "1.0.0",
+  "description": "backend node.js ",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Nguyen-Thiet-Do/Be_Nodejs_01.git"
+  },
+  "keywords": [
+    "node.js"
+  ],
+  "author": "Nguyen Thiet Do (TiDii)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Nguyen-Thiet-Do/Be_Nodejs_01/issues"
+  },
+  "homepage": "https://github.com/Nguyen-Thiet-Do/Be_Nodejs_01#readme",
+  "dependencies": {
+    "dotenv": "^17.2.1",
+    "ejs": "^3.1.10",
+    "express": "^5.1.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
+}
