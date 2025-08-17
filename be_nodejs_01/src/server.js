@@ -1,29 +1,25 @@
 const express = require('express') // import express module
 const app = express()
-
 require('dotenv').config() // import dotenv module to use environment variables
-
 const port = process.env.PORT || 8081 // khai báo port cho server
 const hostName = process.env.HOST_NAME // khai báo tên máy chủ
+const webRoutes = require('./routes/web') // import web routes
+const configViewEngine = require('./config/ViewEngine') // import configViewEngine function
+configViewEngine(app) // call configViewEngine function to set up view engine and static files
 
-const path = require('path') // import path module
+const connection = require('./config/database') // import database connection
 
-// conflict template engine
-app.set('view engine', 'ejs') // khai báo template engine
-app.set('views', path.join(__dirname, 'views')) // khai báo thư mục chứa các file template
+app.use('/', webRoutes) // use web routes for the root path
 
 
-// conflict static files
-app.use(express.static(path.join(__dirname, 'public'))) // khai báo thư mục chứa các file tĩnh
 
-app.get('/', (req, res) => {
-  res.send('Hello World!')
-})
+connection.query(
+  'SELECT * from Users', function (error, results, fields) {
 
-app.get('/test', (req, res) => {
-  res.render('test.ejs')
-})
-
+    console.log(results); // results contains rows returned by server
+    console.log(fields); // fields contains extra meta data about results, if available
+  }
+);
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
