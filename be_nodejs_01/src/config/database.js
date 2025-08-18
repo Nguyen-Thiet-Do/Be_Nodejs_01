@@ -1,6 +1,6 @@
 
 require('dotenv').config()
-const mysql = require('mysql2'); // import mysql2 module for database connection
+const mysql = require('mysql2/promise'); // import mysql2 module for database connection
 
 // const connection = mysql.createConnection({
 //     host: process.env.DB_HOST || 'localhost',

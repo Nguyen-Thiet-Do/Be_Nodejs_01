@@ -9,17 +9,13 @@ configViewEngine(app) // call configViewEngine function to set up view engine an
 
 const connection = require('./config/database') // import database connection
 
+//con flig res.body 
+app.use(express.json()) 
+app.use(express.urlencoded({ extended: true })) 
+
+
 app.use('/', webRoutes) // use web routes for the root path
 
-
-
-connection.query(
-  'SELECT * from Users', function (error, results, fields) {
-
-    console.log(results); // results contains rows returned by server
-    console.log(fields); // fields contains extra meta data about results, if available
-  }
-);
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
