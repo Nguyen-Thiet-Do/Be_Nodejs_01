@@ -1,11 +1,10 @@
 const connection = require("../config/database");
 
-const{ getAllUsers } = require("../service/CRUDservice");
+const { getAllUsers, getUserById, updateUserById, createUser , deleteUserById} = require("../service/CRUDservice");
 
 const getHomePage = async (req, res) => {
-
-  let rows = await getAllUsers(); 
-  return res.render('home.ejs', {listUsers: rows}); 
+  let rows = await getAllUsers();
+  return res.render('home.ejs', { listUsers: rows });
 }
 
 const getTestPage = (req, res) => {
@@ -13,24 +12,50 @@ const getTestPage = (req, res) => {
 }
 
 const getCreatePage = (req, res) => {
-  res.render('create.ejs'); // render the create page
+  res.render('create.ejs'); 
 }
 
 const postCreateUser = async (req, res) => {
-  let { email, name, city } = req.body; // destructuring to get email, name, and city from request body
+  let { email, name, city } = req.body;
   console.log(email, name, city);
-
-  const [rows, fields] = await connection.query(
-    `INSERT INTO Users(email, name, city) VALUES(?, ?, ?)`,[email, name, city],
-  )
-  console.log('check results:', rows);
-  
-  res.send('Create user success!'); 
+  await createUser(email, name, city);
+  res.redirect('/');
 }
 
-  module.exports = {
-    getHomePage,
-    getTestPage,
-    postCreateUser,
-    getCreatePage
-  }; // export the function to use in routes
+const getUpdatePage = async (req, res) => {
+  let userId = req.params.id;
+  let user = await getUserById(userId); //
+  return res.render('edit.ejs', { user: user });
+}
+
+const postUpdateUser = async (req, res) => {
+  let { userId, email, name, city } = req.body;
+  console.log(userId, email, name, city);
+  await updateUserById(userId, email, name, city);
+  res.redirect('/'); 
+}
+
+const postDeleteUser = async (req, res) => {
+  let userId = req.params.id;
+  let user = await getUserById(userId);
+  res.render('cfDelete.ejs' , {user: user});
+}
+
+const postHandleRemoveUser = async (req, res) => {
+  let userId = req.body.userId;
+  console.log("userId: ", userId);
+  await deleteUserById(userId);
+  res.redirect('/');
+
+}
+
+module.exports = {
+  getHomePage,
+  getTestPage,
+  postCreateUser,
+  getCreatePage,
+  getUpdatePage,
+  postUpdateUser,
+  postDeleteUser,
+  postHandleRemoveUser
+}; 

@@ -93,3 +93,7 @@ input[type="text"]:focus {
 .btn:hover {
     background-color: #038a58;
 }
+
+.d-none {
+    display: none;
+}

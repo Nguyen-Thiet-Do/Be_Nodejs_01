@@ -1,0 +1,41 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete User page</title>
+    <link rel="stylesheet" href="/css/create.css">
+</head>
+
+<body>
+    <div class="topnav">
+        <a href="/">Home</a>
+        <a href="/create">News</a>
+
+    </div>
+    <div class="form">
+        <form action="/delete-user" method="POST">
+
+            <fieldset>
+                <legend>Delete User</legend>
+                <div class="form-group d-none">
+                    <label> ID: </label>
+                    <input type="text" name="userId" value="<%= user.id %>">
+                </div>
+                <div class="form-group">
+                    <label> mày có chắc muốn xóa Email: </label>
+                    <input type="text" name="email" value="<%= user.email %>">
+                </div>
+                <div class="form-group">
+                    <button class="btn">Confirm</button>
+                    <button class="btn">Close</button>
+
+                </div>
+
+            </fieldset>
+        </form>
+
+    </div>
+</body>
+
+</html>
