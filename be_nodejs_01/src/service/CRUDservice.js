@@ -1,30 +1,40 @@
 const connection = require("../config/database");
+const User = require("../models/users");
+
 
 const createUser = async (email, name, city) => {
-  let [rows, fields] = await connection.query(
-    `INSERT INTO Users(email, name, city) VALUES(?, ?, ?)`, [email, name, city]
-  );
+  await User.create({
+    email: email,
+    name: name,
+    city: city
+  });
 }
 
 const getAllUsers = async (req, res) => {
-  let [rows, fields] = await connection.query('select * from Users');
-  return rows;
+  return rows = await User.find().exec();
 }
 
 const getUserById = async (id) => {
-  let [rows, fields] = await connection.query('select * from Users where id = ?', [id]);
-  let user = rows && rows.length > 0 ? rows[0] : {};
+  let user = await User.findById(id).exec();
+  if (!user) {
+    throw new Error("User not found");
+  }
+  console.log(">>>>>>>>>>>>>>>>>>user: ", user);
   return user;
 }
 
 const updateUserById = async (id, email, name, city) => {
-  let [rows, fields] = await connection.query(
-    `UPDATE Users SET email = ?, name = ?, city = ? WHERE id = ?`, [email, name, city, id]);
-  
+  await User.updateOne(
+    { _id: id },
+    {
+      email: email,
+      name: name,
+      city: city
+    })
 }
 
 const deleteUserById = async (id) => {
-  let [rows, fields] = await connection.query('DELETE FROM Users WHERE id = ?', [id]);
+  await User.deleteOne({_id: id});
 }
 
 module.exports = {

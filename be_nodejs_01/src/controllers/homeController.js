@@ -2,6 +2,7 @@ const connection = require("../config/database");
 
 const { getAllUsers, getUserById, updateUserById, createUser , deleteUserById} = require("../service/CRUDservice");
 
+
 const getHomePage = async (req, res) => {
   let rows = await getAllUsers();
   return res.render('home.ejs', { listUsers: rows });
