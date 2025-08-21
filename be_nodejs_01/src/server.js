@@ -1,5 +1,8 @@
 const express = require('express') // import express module
 const webRoutes = require('./routes/web') // import web routes
+const apiRoutes = require('./routes/api') // import api routes
+
+
 const configViewEngine = require('./config/ViewEngine') // import configViewEngine function
 require('dotenv').config() // import dotenv module to use environment variables
 const connection = require('./config/database') // import database connection
@@ -16,6 +19,8 @@ configViewEngine(app) // call configViewEngine function to set up view engine an
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use('/', webRoutes); // use web routes for the root path
+
+app.use('/v1/api/', apiRoutes); 
 
 
 (async () => {

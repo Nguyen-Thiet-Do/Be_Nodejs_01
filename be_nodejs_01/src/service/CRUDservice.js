@@ -3,11 +3,13 @@ const User = require("../models/users");
 
 
 const createUser = async (email, name, city) => {
-  await User.create({
+  let user = await User.create({
     email: email,
     name: name,
     city: city
   });
+
+  return user;
 }
 
 const getAllUsers = async (req, res) => {
@@ -24,17 +26,20 @@ const getUserById = async (id) => {
 }
 
 const updateUserById = async (id, email, name, city) => {
-  await User.updateOne(
+  let user = await User.updateOne(
     { _id: id },
     {
       email: email,
       name: name,
       city: city
     })
+
+  return user
 }
 
 const deleteUserById = async (id) => {
-  await User.deleteOne({_id: id});
+  let user = await User.deleteOne({ _id: id });
+  return user
 }
 
 module.exports = {
