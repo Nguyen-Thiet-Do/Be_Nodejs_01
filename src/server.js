@@ -1,6 +1,8 @@
 const express = require('express') // import express module
 const webRoutes = require('./routes/web') // import web routes
-const apiRoutes = require('./routes/api') // import api routes
+const apiRoutes = require('./routes/UserApi') // import api routes
+const routerCustomerAPI = require('./routes/customerApi') // import api routes
+
 
 
 const configViewEngine = require('./config/ViewEngine') // import configViewEngine function
@@ -20,7 +22,8 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use('/', webRoutes); // use web routes for the root path
 
-app.use('/v1/api/', apiRoutes); 
+app.use('/v1/api/user/', apiRoutes);
+app.use('/v1/api/customer/', routerCustomerAPI);
 
 
 (async () => {

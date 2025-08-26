@@ -1,5 +1,5 @@
 const express = require('express'); 
-const { getAllUserAPI, postCreateUserAPI, putUpdateUserAPI, delUserAPI } = require('../controllers/apiController');
+const { getAllUserAPI, postCreateUserAPI, putUpdateUserAPI, delUserAPI, postUploadSingleFile } = require('../controllers/apiController');
 const routerAPI = express.Router();
 
 

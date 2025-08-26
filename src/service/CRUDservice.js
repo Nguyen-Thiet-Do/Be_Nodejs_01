@@ -1,4 +1,3 @@
-const connection = require("../config/database");
 const User = require("../models/users");
 
 
